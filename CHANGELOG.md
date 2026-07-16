@@ -7,6 +7,7 @@
 - Added optional pagination to `summarytable` via a `Pagination` argument, which returns a `PaginatedTable`, matching `listingtable` [#140](https://github.com/PumasAI/SummaryTables.jl/pull/140).
 - Added a `full_width` option that fits a table to the full text width (Typst `fr` columns / Word's "AutoFit to window"), settable per table or globally with `defaults!` [#141](https://github.com/PumasAI/SummaryTables.jl/pull/141).
 - Pinned `WriteDocx` to an unreleased commit (temporary, until WriteDocx.jl#46 is released) for `TableWidth` support; generated DOCX now sets the required `w:type="dxa"` on table cell spacing (rendered output is unchanged) [#141](https://github.com/PumasAI/SummaryTables.jl/pull/141).
+- Added a `merge_row_labels` option (default `true`); set it to `false` to keep each row-group label in its own row so DOCX tables can page-break cleanly across long groups [#142](https://github.com/PumasAI/SummaryTables.jl/pull/142).
 
 ## 3.5.1 - 2026-10-23
 

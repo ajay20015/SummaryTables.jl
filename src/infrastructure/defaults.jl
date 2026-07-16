@@ -24,6 +24,8 @@ Base.@kwdef struct Defaults <: AbstractDefaults
     label_key::Union{Nothing,String} = "label"
     "If `true`, tables render at the full text width (Typst `fr` columns / Word \"AutoFit to window\") instead of sized to content."
     full_width::Bool = false
+    "If `true`, row-group label cells are vertically merged across their rows in DOCX. Word cannot page-break a merged region, so set `false` when a group can span more rows than fit on a page (the label then top-anchors in the group's first row)."
+    merge_row_labels::Bool = true
     "Defaults for the `table_one` function"
     table_one::TableOneDefaults = TableOneDefaults()
 end
