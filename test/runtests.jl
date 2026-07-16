@@ -498,6 +498,10 @@ end
             for (i, page) in enumerate(pt.pages)
                 reftest(page.table, "references/summarytable/pagination_cols=1_$i")
             end
+
+            # full_width renders the table at the full text width instead of sized to content.
+            t = summarytable(df, :value1, rows = [:group1], cols = [:group2], summary = [mean, std], full_width = true)
+            reftest(t, "references/summarytable/full_width")
         end
 
         @testset "simple table" begin

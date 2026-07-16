@@ -5,6 +5,8 @@
 - Added `pagination` support to `table_one`, using the same `Pagination`/`PaginatedTable` pattern `listingtable` already has [#147](https://github.com/PumasAI/SummaryTables.jl/pull/147).
 - Corrected the `annotation_labels` docstring which listed the nonexistent `:lowercase` and `:uppercase` variants instead of `:letters_lower` and `:letters_upper` [#137](https://github.com/PumasAI/SummaryTables.jl/pull/137).
 - Added optional pagination to `summarytable` via a `Pagination` argument, which returns a `PaginatedTable`, matching `listingtable` [#140](https://github.com/PumasAI/SummaryTables.jl/pull/140).
+- Added a `full_width` option that fits a table to the full text width (Typst `fr` columns / Word's "AutoFit to window"), settable per table or globally with `defaults!` [#141](https://github.com/PumasAI/SummaryTables.jl/pull/141).
+- Pinned `WriteDocx` to an unreleased commit (temporary, until WriteDocx.jl#46 is released) for `TableWidth` support; generated DOCX now sets the required `w:type="dxa"` on table cell spacing (rendered output is unchanged) [#141](https://github.com/PumasAI/SummaryTables.jl/pull/141).
 
 ## 3.5.1 - 2026-10-23
 
