@@ -37,3 +37,12 @@ StatsBase = "0.33, 0.34"
 Tables = "1"
 WriteDocx = "1.1"
 julia = "1.8"
+
+# TODO: temporary, needs a tracked issue — personal-fork pin because this branch calls
+# WriteDocx.TableProperties(width = ...), which only exists on WriteDocx.jl#46 (table
+# width/layout), not yet released. Pinned to an exact commit on the combined draft branch
+# (both #46 and #48), not a branch tip, so a `Pkg.update()` can't silently pull in
+# unreviewed changes. Remove this block, and bump the compat bound above, once
+# PumasAI/WriteDocx.jl ships a release with this API.
+[sources]
+WriteDocx = {url = "https://github.com/ajay20015/WriteDocx.jl.git", rev = "a9326486dc7e410f790e2d1b1f940dcc4df9a95e"}
