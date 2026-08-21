@@ -90,7 +90,6 @@ Table(cells; footnotes = ["Footnote 1.", "Footnote 2."])
 Table(cells; footnotes = ["Footnote 1.", "Footnote 2."], linebreak_footnotes = false)
 ```
 
-<<<<<<< HEAD
 ## Keyword: `merge_row_labels`
 
 In DOCX output, row-group label cells are by default vertically merged across the rows they span. Word cannot page-break a merged region, so a group spanning more rows than fit on a page breaks awkwardly. Setting `merge_row_labels = false` keeps each row's label cell separate (the label stays in the group's first row, with the remaining rows in that group left blank), so the table can break cleanly across pages. This option only affects DOCX output.
@@ -111,7 +110,8 @@ data = DataFrame(
 )
 
 summarytable(data, :value, rows = [:group1, :group2], summary = [mean], merge_row_labels = false)
-=======
+```
+
 ## Keyword: `full_width`
 
 By default, a table is sized to its content. Setting `full_width = true` makes it fill the available
@@ -128,5 +128,4 @@ Table(cells)
 
 ```@example full_width
 Table(cells; full_width = true)
->>>>>>> aja/141-summarytable-full-width
 ```
