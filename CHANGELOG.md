@@ -20,6 +20,7 @@
   - Trailing zeros are now also stripped from e-notation mantissas and negative numbers.
 - Corrected the `annotation_labels` docstring which listed the nonexistent `:lowercase` and `:uppercase` variants instead of `:letters_lower` and `:letters_upper` [#137](https://github.com/PumasAI/SummaryTables.jl/pull/137).
 - Added optional pagination to `summarytable` via a `Pagination` argument, which returns a `PaginatedTable`, matching `listingtable` [#140](https://github.com/PumasAI/SummaryTables.jl/pull/140).
+- Added a `merge_row_labels` option (default `true`); set it to `false` to keep each row-group label in its own row so DOCX tables can page-break cleanly across long groups [#142](https://github.com/PumasAI/SummaryTables.jl/pull/142).
 
 ## 3.5.1 - 2026-01-23
 
