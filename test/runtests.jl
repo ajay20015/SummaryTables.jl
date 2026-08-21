@@ -502,6 +502,9 @@ end
             # merge_row_labels = false keeps each row-group label in its own row (no vertical merge).
             t = summarytable(df, :value1, rows = [:group1, :group2], summary = [mean], merge_row_labels = false)
             reftest(t, "references/summarytable/merge_row_labels_false")
+            # full_width renders the table at the full text width instead of sized to content.
+            t = summarytable(df, :value1, rows = [:group1], cols = [:group2], summary = [mean, std], full_width = true)
+            reftest(t, "references/summarytable/full_width")
         end
 
         @testset "simple table" begin

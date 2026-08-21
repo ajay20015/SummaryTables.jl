@@ -19,8 +19,13 @@
   - `trailing_zeros = true` now pads numbers to the requested precision in the `:auto` and `:sigdigits` modes, for example `1.50` at 3 significant digits.
   - Trailing zeros are now also stripped from e-notation mantissas and negative numbers.
 - Corrected the `annotation_labels` docstring which listed the nonexistent `:lowercase` and `:uppercase` variants instead of `:letters_lower` and `:letters_upper` [#137](https://github.com/PumasAI/SummaryTables.jl/pull/137).
+<<<<<<< HEAD
 - Added optional pagination to `summarytable` via a `Pagination` argument, which returns a `PaginatedTable`, matching `listingtable` [#140](https://github.com/PumasAI/SummaryTables.jl/pull/140).
 - Added a `merge_row_labels` option (default `true`); set it to `false` to keep each row-group label in its own row so DOCX tables can page-break cleanly across long groups [#142](https://github.com/PumasAI/SummaryTables.jl/pull/142).
+=======
+- Added a `full_width` option that fits a table to the full text width (Typst `fr` columns / Word's "AutoFit to window"), settable per table or globally with `defaults!` [#141](https://github.com/PumasAI/SummaryTables.jl/pull/141).
+- Bumped `WriteDocx` to 1.3; generated DOCX now sets the required `w:type="dxa"` on table cell spacing (rendered output is unchanged) [#141](https://github.com/PumasAI/SummaryTables.jl/pull/141).
+>>>>>>> aja/141-summarytable-full-width
 
 ## 3.5.1 - 2026-01-23
 

@@ -9,6 +9,7 @@ struct Table
     number_format::Union{Nothing,NumberFormat}
     linebreak_footnotes::Bool
     merge_row_labels::Bool
+    full_width::Bool
 end
 
 function Table(cells, header, footer;
@@ -22,12 +23,14 @@ function Table(cells, header, footer;
         colgaps = Pair{Int,Float64}[],
         linebreak_footnotes = default,
         merge_row_labels = default,
+        full_width = default,
     )
     defs = defaults()
     _number_format = resolve_number_format(number_format, round_digits, round_mode, trailing_zeros, defs)
     _linebreak_footnotes = fallback(linebreak_footnotes, defs.linebreak_footnotes)
     _merge_row_labels = fallback(merge_row_labels, defs.merge_row_labels)
-    Table(cells, header, footer, footnotes, rowgaps, colgaps, postprocess, _number_format, _linebreak_footnotes, _merge_row_labels)
+    _full_width = fallback(full_width, defs.full_width)
+    Table(cells, header, footer, footnotes, rowgaps, colgaps, postprocess, _number_format, _linebreak_footnotes, _merge_row_labels, _full_width)
 end
 
 function resolve_number_format(number_format, round_digits, round_mode, trailing_zeros, defs)
@@ -102,6 +105,8 @@ Create a `Table` which can be rendered in multiple formats, such as HTML or LaTe
 - `merge_row_labels = true`: If `true`, row-group label cells are vertically merged across their rows in DOCX.
     Word cannot page-break a merged region, so set `false` when a group can span more rows than fit on a page
     (the label then top-anchors in the group's first row).
+- `full_width = false`: If `true`, the table renders at the full text width (Typst `fr` columns / Word
+    "AutoFit to window") instead of sized to content.
 """
 Table(cells; header = nothing, footer = nothing, kwargs...) = Table(cells, header, footer; kwargs...)
 
@@ -253,7 +258,7 @@ function postprocess_table(ct::Table, any)
         end
         return new_cell
     end
-    Table(new_cl, ct.header, ct.footer, ct.footnotes, ct.rowgaps, ct.colgaps, [], ct.number_format, ct.linebreak_footnotes, ct.merge_row_labels)
+    Table(new_cl, ct.header, ct.footer, ct.footnotes, ct.rowgaps, ct.colgaps, [], ct.number_format, ct.linebreak_footnotes, ct.merge_row_labels, ct.full_width)
 end
 
 function postprocess_table(ct::Table, v::AbstractVector)
