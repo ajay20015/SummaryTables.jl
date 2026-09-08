@@ -6,6 +6,8 @@
 - Added optional pagination to `summarytable` via a `Pagination` argument, which returns a `PaginatedTable`, matching `listingtable` [#144](https://github.com/PumasAI/SummaryTables.jl/pull/144).
 - Added `pagination` support to `table_one`, using the same `Pagination`/`PaginatedTable` pattern `listingtable` already has [#147](https://github.com/PumasAI/SummaryTables.jl/pull/147).
 
+- Added a `merge_row_labels` option (default `true`); set it to `false` to keep each row-group label in its own row so DOCX tables can page-break cleanly across long groups [#145](https://github.com/PumasAI/SummaryTables.jl/pull/145).
+
 ## 3.7.1 - 2026-09-04
 
 - Allowed `HypothesisTests` 0.12 [#158](https://github.com/PumasAI/SummaryTables.jl/pull/158).

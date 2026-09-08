@@ -499,6 +499,10 @@ end
             for (i, page) in enumerate(pt.pages)
                 reftest(page.table, "references/summarytable/pagination_cols=1_$i")
             end
+
+            # merge_row_labels = false keeps each row-group label in its own row (no vertical merge).
+            t = summarytable(df, :value1, rows = [:group1, :group2], summary = [mean], merge_row_labels = false)
+            reftest(t, "references/summarytable/merge_row_labels_false")
         end
 
         @testset "simple table" begin
