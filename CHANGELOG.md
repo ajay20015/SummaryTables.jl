@@ -8,6 +8,8 @@
 
 - Added a `merge_row_labels` option (default `true`); set it to `false` to keep each row-group label in its own row so DOCX tables can page-break cleanly across long groups [#145](https://github.com/PumasAI/SummaryTables.jl/pull/145).
 
+- Added a `full_width` option that fits a table to the full text width (Typst `fr` columns / Word's "AutoFit to window"), settable per table or globally with `defaults!`. The Word output needs `WriteDocx`'s table width, so the `WriteDocx` compat bound is raised to 1.3 [#143](https://github.com/PumasAI/SummaryTables.jl/pull/143).
+
 ## 3.7.1 - 2026-09-04
 
 - Allowed `HypothesisTests` 0.12 [#158](https://github.com/PumasAI/SummaryTables.jl/pull/158).

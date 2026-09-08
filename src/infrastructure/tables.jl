@@ -8,6 +8,7 @@ struct Table
     postprocess::Vector{Any}
     number_format::Union{Nothing,NumberFormat}
     linebreak_footnotes::Bool
+    full_width::Bool
     merge_row_labels::Bool
     style::TableStyle
 end
@@ -22,6 +23,7 @@ function Table(cells, header, footer;
         rowgaps = Pair{Int,Float64}[],
         colgaps = Pair{Int,Float64}[],
         linebreak_footnotes = default,
+        full_width = default,
         outer_rule_width = default,
         inner_rule_width = default,
         cell_rule_width = default,
@@ -35,6 +37,7 @@ function Table(cells, header, footer;
     defs = defaults()
     _number_format = resolve_number_format(number_format, round_digits, round_mode, trailing_zeros, defs)
     _linebreak_footnotes = fallback(linebreak_footnotes, defs.linebreak_footnotes)
+    _full_width = fallback(full_width, defs.full_width)
     _merge_row_labels = fallback(merge_row_labels, defs.merge_row_labels)
     style = TableStyle(
         outer_rule_width = fallback(outer_rule_width, defs.outer_rule_width),
@@ -47,7 +50,7 @@ function Table(cells, header, footer;
     )
     _rowgaps = Pair{Int,Length}[k => to_length(v) for (k, v) in rowgaps]
     _colgaps = Pair{Int,Length}[k => to_length(v) for (k, v) in colgaps]
-    Table(cells, header, footer, footnotes, _rowgaps, _colgaps, postprocess, _number_format, _linebreak_footnotes, _merge_row_labels, style)
+    Table(cells, header, footer, footnotes, _rowgaps, _colgaps, postprocess, _number_format, _linebreak_footnotes, _full_width, _merge_row_labels, style)
 end
 
 function validate_header_footer(nrows, header, footer)
@@ -142,6 +145,8 @@ Create a `Table` which can be rendered in multiple formats, such as HTML or LaTe
     added between the columns `index` and `index+1`. Each `gap` is an `Em` or `Pt` length, or a bare
     number interpreted as points.
 - `linebreak_footnotes = true`: If `true`, each footnote and annotation starts on a separate line.
+- `full_width = false`: If `true`, the table renders at the full text width (Typst `fr` columns / Word
+    "AutoFit to window") instead of sized to content.
 - `outer_rule_width = 0.1em`: Width of the rules above and below the table.
 - `inner_rule_width = 0.075em`: Width of the rules below the header and above the footer.
 - `cell_rule_width = 0.075em`: Width of the rules drawn for cells with `border_bottom = true`.
@@ -310,7 +315,7 @@ function postprocess_table(ct::Table, any)
         end
         return new_cell
     end
-    Table(new_cl, ct.header, ct.footer, ct.footnotes, ct.rowgaps, ct.colgaps, [], ct.number_format, ct.linebreak_footnotes, ct.merge_row_labels, ct.style)
+    Table(new_cl, ct.header, ct.footer, ct.footnotes, ct.rowgaps, ct.colgaps, [], ct.number_format, ct.linebreak_footnotes, ct.full_width, ct.merge_row_labels, ct.style)
 end
 
 function postprocess_table(ct::Table, v::AbstractVector)
